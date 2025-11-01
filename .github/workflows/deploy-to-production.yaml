@@ -1,0 +1,12 @@
+name: "Deploy to Production"
+
+on:
+  workflow_call:
+
+jobs:
+  deploy-to-staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Deploy to Production"
+        run: |
+          echo "Deploying to Production..."
