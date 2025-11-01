@@ -19,7 +19,11 @@ jobs:
       - name: "Test"
         run: |
           echo "Testing..."
-      - name: "Deploy to Staging"
-        uses: vanmumuuu/deployment-to-environments/.github/workflows/deploy-to-staging.yaml@main
-      - name: "Deploy to Production"
-        uses: vanmumuuu/deployment-to-environments/.github/workflows/deploy-to-production.yaml@main
+
+  deploy-to-staging:
+    uses: vanmumuuu/deployment-to-environments/.github/workflows/deploy-to-staging.yaml@main
+    needs: [build-and-test]
+
+  deploy-to-production:
+    uses: vanmumuuu/deployment-to-environments/.github/workflows/deploy-to-production.yaml@main
+    needs: [deploy-to-staging]
