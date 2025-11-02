@@ -23,7 +23,9 @@ jobs:
   deploy-to-staging:
     uses: vanmumuuu/deployment-to-environments/.github/workflows/deploy-to-staging.yaml@main
     needs: [build-and-test]
+    if: github.ref_name == 'main'
 
   deploy-to-production:
     uses: vanmumuuu/deployment-to-environments/.github/workflows/deploy-to-production.yaml@main
     needs: [deploy-to-staging]
+    if: github.ref_name == 'main'
