@@ -6,6 +6,7 @@ on:
 jobs:
   deploy-to-production:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - name: "Deploy to Production"
         run: |
