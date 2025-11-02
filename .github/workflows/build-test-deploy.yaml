@@ -25,7 +25,21 @@ jobs:
     needs: [build-and-test]
     if: github.ref_name == 'main'
 
+  run-e2e-on-staging:
+    uses: vanmumuuu-organization/deployment-to-environments/.github/workflows/run-e2e.yaml@main
+    with:
+      environment: staging
+    needs: [deploy-to-staging]
+    if: github.ref_name == 'main'
+
   deploy-to-production:
     uses: vanmumuuu-organization/deployment-to-environments/.github/workflows/deploy-to-production.yaml@main
-    needs: [deploy-to-staging]
+    needs: [run-e2e-on-staging]
+    if: github.ref_name == 'main'
+
+  run-e2e-on-production:
+    uses: vanmumuuu-organization/deployment-to-environments/.github/workflows/run-e2e.yaml@main
+    with:
+      environment: production
+    needs: [deploy-to-production]
     if: github.ref_name == 'main'
